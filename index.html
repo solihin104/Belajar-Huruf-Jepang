@@ -203,7 +203,7 @@
                     { char: 'ちゃ', romaji: 'cha' }, { char: 'ちゅ', romaji: 'chu' }, { char: 'ちょ', romaji: 'cho' },
                     { char: 'にゃ', romaji: 'nya' }, { char: 'にゅ', romaji: 'nyu' }, { char: 'にょ', romaji: 'nyo' },
                     { char: 'ひゃ', romaji: 'hya' }, { char: 'ひゅ', romaji: 'hyu' }, { char: 'ひょ', romaji: 'hyo' },
-                    { char: 'みゃ', romaji: 'mya' }, { char: 'miゅ', romaji: 'myu' }, { char: 'みょ', romaji: 'myo' },
+                    { char: 'みゃ', romaji: 'mya' }, { char: 'みゅ', romaji: 'myu' }, { char: 'みょ', romaji: 'myo' },
                     { char: 'りゃ', romaji: 'rya' }, { char: 'りゅ', romaji: 'ryu' }, { char: 'りょ', romaji: 'ryo' },
                     { char: 'ぎゃ', romaji: 'gya' }, { char: 'ぎゅ', romaji: 'gyu' }, { char: 'ぎょ', romaji: 'gyo' },
                     { char: 'じゃ', romaji: 'ja' }, { char: 'じゅ', romaji: 'ju' }, { char: 'じょ', romaji: 'jo' },
@@ -439,20 +439,21 @@ function showStroke(char) {
     `;
 }
     </script>
-    <!-- Modal Stroke Order -->
+  <!-- Modal Stroke Order -->
 <div id="strokeModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
     <div class="bg-white rounded-3xl p-6 w-[90%] max-w-md text-center relative">
-        
+
         <button onclick="closeStrokeModal()" class="absolute top-3 right-3 text-2xl">
             ✖
         </button>
 
         <h2 id="strokeTitle" class="text-5xl font-bold mb-4">あ</h2>
 
-        <svg id="strokeSVG" viewBox="0 0 200 200" class="w-64 h-64 mx-auto border rounded-xl bg-slate-50">
-        </svg>
+        <div id="strokeSVG" class="w-64 h-64 mx-auto border rounded-xl bg-slate-50 flex items-center justify-center overflow-hidden">
+        </div>
 
         <p class="mt-4 text-slate-500">Klik huruf lain untuk melihat cara menulis</p>
+
     </div>
 </div>
 </body>
