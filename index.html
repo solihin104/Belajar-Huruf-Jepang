@@ -421,24 +421,29 @@ ${item.romaji}
 }
 
 function showStroke(char) {
-    document.getElementById("strokeModal").classList.remove("hidden");
-    document.getElementById("strokeModal").classList.add("flex");
-    document.getElementById("strokeTitle").textContent = char;
+    const modal = document.getElementById("strokeModal");
+    const title = document.getElementById("strokeTitle");
+    const box = document.getElementById("strokeSVG");
 
-    const code = char.charCodeAt(0);
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
 
-    fetch(`stroke/${code}.svg`)
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById("strokeSVG").innerHTML = data;
+    title.textContent = char;
+    box.innerHTML = "Loading...";
+
+    const code = char.codePointAt(0);
+
+    fetch("./stroke/" + code + ".svg")
+    .then(res => {
+        if (!res.ok) throw new Error("not found");
+        return res.text();
     })
-    .catch(() => {
-        document.getElementById("strokeSVG").innerHTML = "Stroke tidak ditemukan";
+    .then(svg => {
+        box.innerHTML = svg;
+    })
+    .catch(err => {
+        box.innerHTML = "File " + code + ".svg tidak ditemukan";
     });
-}
-
-function closeStrokeModal(){
-    document.getElementById("strokeModal").classList.add("hidden");
 }
     </script>
     <!-- Modal Stroke Order -->
