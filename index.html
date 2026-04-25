@@ -429,21 +429,14 @@ function showStroke(char) {
     modal.classList.add("flex");
 
     title.textContent = char;
-    box.innerHTML = "Loading...";
 
     const code = char.codePointAt(0);
 
-    fetch("./stroke/" + code + ".svg")
-    .then(res => {
-        if (!res.ok) throw new Error("not found");
-        return res.text();
-    })
-    .then(svg => {
-        box.innerHTML = svg;
-    })
-    .catch(err => {
-        box.innerHTML = "File " + code + ".svg tidak ditemukan";
-    });
+    box.innerHTML = `
+      <img src="./${code}.svg"
+           class="w-64 h-64 mx-auto"
+           onerror="this.outerHTML='File ${code}.svg tidak ditemukan'">
+    `;
 }
     </script>
     <!-- Modal Stroke Order -->
