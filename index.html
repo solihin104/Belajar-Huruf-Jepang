@@ -421,39 +421,24 @@ ${item.romaji}
 }
 
 function showStroke(char) {
-    if(char === '') return;
-
     document.getElementById("strokeModal").classList.remove("hidden");
     document.getElementById("strokeModal").classList.add("flex");
     document.getElementById("strokeTitle").textContent = char;
 
-    const svg = document.getElementById("strokeSVG");
+    const code = char.charCodeAt(0);
 
-    let path = "";
+    fetch(`stroke/${code}.svg`)
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("strokeSVG").innerHTML = data;
+    })
+    .catch(() => {
+        document.getElementById("strokeSVG").innerHTML = "Stroke tidak ditemukan";
+    });
+}
 
-    // Contoh beberapa huruf
-    if(char === "あ"){
-        path = `
-        <path class="stroke-path" d="M60 40 L130 40" />
-        <path class="stroke-path" d="M95 20 L95 140" style="animation-delay:1s"/>
-        <path class="stroke-path" d="M70 110 C100 70,140 90,120 150" style="animation-delay:2s"/>
-        `;
-    }
-
-    else if(char === "い"){
-        path = `
-        <path class="stroke-path" d="M80 30 L70 130"/>
-        <path class="stroke-path" d="M120 40 L130 150" style="animation-delay:1s"/>
-        `;
-    }
-
-    else {
-        path = `
-        <text x="50%" y="55%" text-anchor="middle" font-size="80">${char}</text>
-        `;
-    }
-
-    svg.innerHTML = path;
+function closeStrokeModal(){
+    document.getElementById("strokeModal").classList.add("hidden");
 }
     </script>
     <!-- Modal Stroke Order -->
